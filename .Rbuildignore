@@ -3,3 +3,6 @@
 ^dev$
 ^mise\.toml$
 ^LICENSE\.md$
+^README\.Rmd$
+^\.github$
+^*\.html$
