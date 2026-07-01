@@ -71,7 +71,7 @@ Below is the citation output from using `citation('aqlyzer')` in R. Please
 run this yourself to check for any updates on how to cite __aqlyzer__.
 
 ```{r 'citation', eval = requireNamespace('aqlyzer')}
-print(citation('aqlyzer'), bibtex = TRUE)
+print(citation("aqlyzer"), bibtex = TRUE)
 ```
 
 Please note that the `aqlyzer` was only made possible thanks to many other R and bioinformatics software authors, which are cited either in the vignettes and/or the paper(s) describing this package.
