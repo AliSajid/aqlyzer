@@ -21,6 +21,7 @@ history](https://bioconductor.org/shields/years-in-bioc/aqlyzer.svg)](https://bi
 commit](https://bioconductor.org/shields/lastcommit/devel/bioc/aqlyzer.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/aqlyzer/)
 [![Bioc
 dependencies](https://bioconductor.org/shields/dependencies/release/aqlyzer.svg)](https://bioconductor.org/packages/release/bioc/html/aqlyzer.html#since)
+[![extendr](https://img.shields.io/badge/extendr-*-276DC2)](https://extendr.github.io/extendr/extendr_api/)
 <!-- badges: end -->
 
 The goal of `aqlyzer` is to …
@@ -79,7 +80,39 @@ Please run this yourself to check for any updates on how to cite
 **aqlyzer**.
 
 ``` r
-print(citation('aqlyzer'), bibtex = TRUE)
+print(citation("aqlyzer"), bibtex = TRUE)
+#> To cite package 'aqlyzer' in publications use:
+#> 
+#>   Imami AS (2026). _aqlyzer_. doi:10.18129/B9.bioc.aqlyzer
+#>   <https://doi.org/10.18129/B9.bioc.aqlyzer>.
+#>   https://github.com//aqlyzer - R package version 0.99.0,
+#>   <http://www.bioconductor.org/packages/aqlyzer>.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {aqlyzer},
+#>     author = {Ali Sajid Imami},
+#>     year = {2026},
+#>     url = {http://www.bioconductor.org/packages/aqlyzer},
+#>     note = {https://github.com//aqlyzer - R package version 0.99.0},
+#>     doi = {10.18129/B9.bioc.aqlyzer},
+#>   }
+#> 
+#>   Imami AS (2026). "aqlyzer." _bioRxiv_. doi:10.1101/TODO
+#>   <https://doi.org/10.1101/TODO>.
+#>   <https://www.biorxiv.org/content/10.1101/TODO>.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Article{,
+#>     title = {aqlyzer},
+#>     author = {Ali Sajid Imami},
+#>     year = {2026},
+#>     journal = {bioRxiv},
+#>     doi = {10.1101/TODO},
+#>     url = {https://www.biorxiv.org/content/10.1101/TODO},
+#>   }
 ```
 
 Please note that the `aqlyzer` was only made possible thanks to many

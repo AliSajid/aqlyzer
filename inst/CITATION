@@ -7,9 +7,10 @@ pkgVer <- function(pkg) {
 c(
 
     bibentry(bibtype="manual",
-        title = "",
+        title = "aqlyzer",
         author = personList(
-            as.person("")
+    person(c("Ali", "Sajid"), "Imami", , "Ali.Sajid.Imami@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-3684-3539"))
         ),
         year = format(Sys.Date(), "%Y"),
         url = "http://www.bioconductor.org/packages/aqlyzer",
@@ -17,9 +18,10 @@ c(
         doi = '10.18129/B9.bioc.aqlyzer'
     ),
     bibentry(bibtype="article",
-        title = "",
+        title = "aqlyzer",
         author = personList(
-            as.person("")
+    person(c("Ali", "Sajid"), "Imami", , "Ali.Sajid.Imami@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-3684-3539"))
         ),
         year = format(Sys.Date(), "%Y"),
         journal = "bioRxiv",

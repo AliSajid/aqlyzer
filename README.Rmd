@@ -24,6 +24,7 @@ knitr::opts_chunk$set(
 [![Bioc history](https://bioconductor.org/shields/years-in-bioc/aqlyzer.svg)](https://bioconductor.org/packages/release/bioc/html/aqlyzer.html#since)
 [![Bioc last commit](https://bioconductor.org/shields/lastcommit/devel/bioc/aqlyzer.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/aqlyzer/)
 [![Bioc dependencies](https://bioconductor.org/shields/dependencies/release/aqlyzer.svg)](https://bioconductor.org/packages/release/bioc/html/aqlyzer.html#since)
+[![extendr](https://img.shields.io/badge/extendr-*-276DC2)](https://extendr.github.io/extendr/extendr_api/)
 <!-- badges: end -->
 
 The goal of `aqlyzer` is to ...

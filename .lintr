@@ -1,0 +1,34 @@
+linters: linters_with_tags(
+    tags = c(
+        "default",
+        "best_practices",
+        "common_mistakes",
+        "consistency",
+        "correctness",
+        "efficiency",
+        "executing",
+        "package_development",
+        "pkg_testthat",
+        "readability",
+        "regex",
+        "robustness",
+        "style"
+    ),
+    line_length_linter(length = 120),
+    indentation_linter(indent = 4L, hanging_indent_style = "never"),
+    undesirable_function_linter(
+        modify_defaults(
+        defaults = default_undesirable_functions,
+        library = NULL)
+    ),
+    object_name_linter(styles = c("camelCase")),
+    cyclocomp_linter(complexity_limit = 30L),
+    strings_as_factors_linter = NULL,
+    missing_package_linter = NULL,
+    todo_comment_linter = NULL
+    )
+encoding: "UTF-8"
+exclusions: list(
+    "renv/activate.R",
+    "doc/"
+    )
