@@ -14,9 +14,9 @@ Description: Provides a reproducible pipeline for processing and analysing
     performance, with a pure R fallback. A Shiny application is included
     for push-button analysis without direct use of R code.
 License: MIT + file LICENSE
-URL: 
-BugReports: 
-biocViews: Software
+URL: https://github.com/AliSajid/aqlyzer
+BugReports: https://github.com/AliSajid/aqlyzer/issues
+biocViews: ShinyApps, Regression, Proteomics, FunctionalPrediction
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 8.0.0
