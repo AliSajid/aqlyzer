@@ -1,2 +1,14 @@
+[tools]
+hk = "1.49.0"
+# R itself isn't installed via mise here — add an R plugin/tool entry if you
+# want mise to manage the R toolchain too; otherwise it just shells out to
+# whatever `Rscript` is on PATH.
+"cargo:typos-cli" = "latest" # provides the `typos` binary used by hk's builtin
+jq = "latest"
+
 [env]
+HK_MISE = 1
 RENV_CONFIG_USER_PROFILE = true
+
+[hooks]
+postinstall = "hk install --mise"

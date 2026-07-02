@@ -1,0 +1,170 @@
+amends "package://github.com/jdx/hk/releases/download/v1.49.0/hk@1.49.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v1.49.0/hk@1.49.0#/Builtins.pkl"
+
+// ---------------------------------------------------------------------------
+// All custom logic (R scripts, shell scripts) lives in mise.toml as tasks and
+// is invoked here via `mise run <task>`. See mise.toml alongside this file.
+// Anything with a `hk util ...` or a plain tool name is a native hk builtin.
+// ---------------------------------------------------------------------------
+
+hooks {
+  ["pre-commit"] {
+    fix = true
+
+    steps {
+      // === General file hygiene (pre-commit/pre-commit-hooks) ================
+
+      ["check-added-large-files"] = Builtins.check_added_large_files
+      // default --maxkb is already 500, matches the original config
+
+      ["check-merge-conflict"] = Builtins.check_merge_conflict
+
+      ["check-json"] {
+        // plain validation only (not reformatting, unlike the `jq` builtin)
+        glob = List("**/*.json")
+        check = "jq empty {{files}}"
+      }
+
+      ["trailing-whitespace"] = Builtins.trailing_whitespace
+
+      ["end-of-file-fixer"] = (Builtins.newlines) {
+        glob = List("**/*")
+        // original excluded *.Rd — hk globs don't support negation directly,
+        // so exclude via a second, narrower override if *.Rd churn is a problem:
+        // glob = List("**/*", "!**/*.Rd")
+      }
+
+      ["mixed-line-ending"] {
+        // original used --fix=no (report only, never rewrite)
+        glob = List("**/*")
+        check = "hk util mixed-line-ending --diff {{files}}"
+      }
+
+      ["forbid-tabs"] {
+        // covers Lucas-C's forbid-tabs/remove-tabs and forbid-crlf/remove-crlf
+        // (the latter folded into mixed-line-ending above)
+        glob = List("**/*")
+        check = "mise run forbid-tabs -- {{files}}"
+        fix = "mise run remove-tabs -- {{files}}"
+      }
+
+      ["file-contents-sorter"] {
+        glob = List(".Rbuildignore")
+        check = "sort -c {{files}}"
+        fix = "sort -o {{files}} {{files}}"
+      }
+
+      ["no-commit-to-branch"] {
+        // hk's builtin only matches literal branch names, not regex, so
+        // "RELEASE.*" needs a custom check
+        check = "mise run no-commit-to-branch"
+      }
+
+      ["forbid-to-commit"] {
+        glob = List("**/*.Rhistory", "**/*.RData", "**/*.Rds", "**/*.rds")
+        check = "echo 'Cannot commit .Rhistory, .RData, .Rds or .rds.' && exit 1"
+      }
+
+      // === Spell check ==========================================================
+      // typos (Rust, crate-ci/typos) instead of the R `spelling` package —
+      // general purpose, fast, and works across the whole repo, not just R files.
+
+      ["typos"] = (Builtins.typos) {
+        glob = List("**/*")
+      }
+
+      // === R package hygiene (was lorenzwalthert/precommit) =================
+      // None of these have hk builtins — hk has no R-specific tooling yet.
+      // Reimplemented as mise tasks. Verify against your actual usage of the
+      // `precommit` R package before relying on these — they are best-effort
+      // re-implementations of what those hooks did, not a byte-for-byte port.
+
+      ["r-tidy-description"] {
+        glob = List("DESCRIPTION")
+        check = "mise run tidy-description-check"
+        fix = "mise run tidy-description-fix"
+      }
+
+      ["r-parsable"] {
+        glob = List("**/*.R", "**/*.r")
+        check = "mise run parsable -- {{files}}"
+      }
+
+      ["r-no-browser-statement"] {
+        glob = List("**/*.R", "**/*.r")
+        check = "mise run no-browser -- {{files}}"
+      }
+
+      ["r-no-debug-statement"] {
+        glob = List("**/*.R", "**/*.r")
+        check = "mise run no-debug -- {{files}}"
+      }
+
+      ["r-deps-in-desc"] {
+        // Least confident mapping — original hook parses library()/:: calls
+        // across the package and cross-checks against DESCRIPTION Imports.
+        // This mise task does a best-effort static grep-based version.
+        // Worth spot-checking output for a while before trusting it fully.
+        glob = List("**/*.R", "**/*.r", "DESCRIPTION")
+        check = "mise run deps-in-desc"
+      }
+
+      ["r-readme-rendered"] {
+        glob = List("README.Rmd", "README.md")
+        check = "mise run readme-check"
+        fix = "mise run readme-fix"
+      }
+
+      ["r-style"] {
+        // was: styler::style_pkg(transformers = styler::tidyverse_style(indent_by = 4))
+        glob = List("**/*.R", "**/*.r")
+        fix = "mise run style -- {{files}}"
+      }
+
+      ["r-lint"] {
+        // was: lintr::lint_package()
+        // depends on r-style so lint always evaluates post-formatting output,
+        // matching the original style_files -> lint_files order
+        glob = List("**/*.R", "**/*.r")
+        check = "mise run lint -- {{files}}"
+        depends = List("r-style")
+      }
+
+      // === Versioning (local hooks) ============================================
+      // bump-version, r-tidy-description-fix, and r-codemeta all touch
+      // DESCRIPTION/codemeta.json — depends chains keep them from racing on
+      // the same files and preserves the original hook order.
+
+      ["bump-version"] {
+        exclusive = true // always_run + must finish before later steps, like original
+        fix = "mise run bump-version"
+        depends = List("r-tidy-description")
+      }
+
+      ["r-codemeta"] {
+        // covers both codemeta-description-updated (precommit repo) and the
+        // codemeta-json-updated local hook — they did the same thing
+        glob = List("DESCRIPTION")
+        fix = "mise run codemeta"
+        depends = List("bump-version")
+      }
+    }
+  }
+
+  ["commit-msg"] {
+    steps {
+      ["conventional-commit"] {
+        check =
+          "hk util check-conventional-commit --allowed-types build,chore,ci,docs,feat,fix,perf,refactor,revert,style,test,bump {{commit_msg_file}}"
+      }
+    }
+  }
+
+  ["post-commit"] {
+    steps {
+      ["create-version-tag"] {
+        fix = "mise run create-version-tag"
+      }
+    }
+  }
+}
