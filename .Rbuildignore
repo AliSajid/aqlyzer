@@ -11,3 +11,8 @@
 ^src/rust/target$
 ^src/Makevars$
 ^src/Makevars\.win$
+^\.lintr$
+^\.mise$
+^README\.html$
+^hk\.pkl$
+^pkgdown$
