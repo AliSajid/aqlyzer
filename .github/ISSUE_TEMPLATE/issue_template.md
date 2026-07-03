@@ -45,7 +45,7 @@ options(width = 120)
 
 </details>
 
-Indicate whether `BiocManager::valid()` returns `TRUE`. 
+Indicate whether `BiocManager::valid()` returns `TRUE`.
 
 - [ ] `BiocManager::valid()` is `TRUE`
 
@@ -62,7 +62,7 @@ Provide some additional context for the bug report. You may include web links
 * code inside a commit
 * code from an R package
 
-## Is the package installed via bioconda? 
+## Is the package installed via bioconda?
 
 We find that [bioconda](https://bioconda.github.io/) installations can often be
 problematic due to the nature of the setup environment and potential for version
@@ -70,4 +70,3 @@ mixing.
 
 The preferred method for installing Bioconductor software through `BiocManager`
 and we do not support issues related to `bioconda` installations at this time.
-

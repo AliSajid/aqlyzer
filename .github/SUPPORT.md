@@ -32,7 +32,7 @@ overview of places that may help answer your question.
   to use the
   [appropriate package tag](https://support.bioconductor.org/tag/aqlyzer),
   otherwise the package authors will not get a notification.
-  
+
 * General R questions can be posed at StackOverflow or at the
   [RStudio Community](https://community.rstudio.com/) website especially if they
   pertain to the `tidyverse` or the RStudio GUI or related products.

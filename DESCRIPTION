@@ -2,7 +2,7 @@ Package: aqlyzer
 Title: Fluorescence Kinetics Analysis for Microplate Assays
 Version: 0.99.2008
 Date: 2026-07-01
-Authors@R: 
+Authors@R:
     person(c("Ali", "Sajid"), "Imami", , "Ali.Sajid.Imami@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-3684-3539"))
 Description: Provides a reproducible pipeline for processing and analysing
@@ -20,7 +20,7 @@ biocViews: ShinyApps, Regression, Proteomics, FunctionalPrediction
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 8.0.0
-Suggests: 
+Suggests:
     BiocStyle,
     knitr,
     RefManageR,
@@ -31,5 +31,5 @@ Config/testthat/edition: 3
 VignetteBuilder: knitr
 Config/rextendr/version: 0.5.0
 SystemRequirements: Cargo (Rust's package manager), rustc >= 1.65.0, xz
-Depends: 
+Depends:
     R (>= 4.6)

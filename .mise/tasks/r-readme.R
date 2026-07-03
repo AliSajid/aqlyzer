@@ -58,7 +58,7 @@ readme_check <- function() {
   }
 
   if (out_of_date) {
-    message("README.md is out of date with README.Rmd. Run `mise run readme-fix`.")
+    message("README.md is out of date with README.Rmd. Run `mise run r-readme readme-fix`.")
     quit_with(1)
   }
 

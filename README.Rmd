@@ -11,20 +11,42 @@ knitr::opts_chunk$set(
     fig.path = "man/figures/README-",
     out.width = "100%"
 )
+
+pkg <- "aqlyzer"
+
+# Flip this to TRUE once the package appears on Bioconductor
+on_bioconductor <- FALSE
 ```
 
 # aqlyzer
 
 <!-- badges: start -->
+
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![Bioc release status](http://www.bioconductor.org/shields/build/release/bioc/aqlyzer.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/aqlyzer)
-[![Bioc devel status](http://www.bioconductor.org/shields/build/devel/bioc/aqlyzer.svg)](https://bioconductor.org/checkResults/devel/bioc-LATEST/aqlyzer)
-[![Bioc downloads rank](https://bioconductor.org/shields/downloads/release/aqlyzer.svg)](http://bioconductor.org/packages/stats/bioc/aqlyzer/)
-[![Bioc support](https://bioconductor.org/shields/posts/aqlyzer.svg)](https://support.bioconductor.org/tag/aqlyzer)
-[![Bioc history](https://bioconductor.org/shields/years-in-bioc/aqlyzer.svg)](https://bioconductor.org/packages/release/bioc/html/aqlyzer.html#since)
-[![Bioc last commit](https://bioconductor.org/shields/lastcommit/devel/bioc/aqlyzer.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/aqlyzer/)
-[![Bioc dependencies](https://bioconductor.org/shields/dependencies/release/aqlyzer.svg)](https://bioconductor.org/packages/release/bioc/html/aqlyzer.html#since)
+
 [![extendr](https://img.shields.io/badge/extendr-*-276DC2)](https://extendr.github.io/extendr/extendr_api/)
+
+```{r bioc-badges, echo=FALSE, results='asis'}
+if (on_bioconductor) {
+    cat(sprintf("
+[![Bioc release status](http://www.bioconductor.org/shields/build/release/bioc/%1$s.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/%1$s)
+
+[![Bioc devel status](http://www.bioconductor.org/shields/build/devel/bioc/%1$s.svg)](https://bioconductor.org/checkResults/devel/bioc-LATEST/%1$s)
+
+[![Bioc downloads rank](https://bioconductor.org/shields/downloads/release/%1$s.svg)](http://bioconductor.org/packages/stats/bioc/%1$s/)
+
+[![Bioc support](https://bioconductor.org/shields/posts/%1$s.svg)](https://support.bioconductor.org/tag/%1$s)
+
+[![Bioc history](https://bioconductor.org/shields/years-in-bioc/%1$s.svg)](https://bioconductor.org/packages/release/bioc/html/%1$s.html#since)
+
+[![Bioc last commit](https://bioconductor.org/shields/lastcommit/devel/bioc/%1$s.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/%1$s/)
+
+[![Bioc dependencies](https://bioconductor.org/shields/dependencies/release/%1$s.svg)](https://bioconductor.org/packages/release/bioc/html/%1$s.html)
+
+", pkg))
+}
+```
+
 <!-- badges: end -->
 
 The goal of `aqlyzer` is to ...
@@ -33,7 +55,7 @@ The goal of `aqlyzer` is to ...
 
 Get the latest stable `R` release from [CRAN](http://cran.r-project.org/). Then install `aqlyzer` from [Bioconductor](http://bioconductor.org/) using the following code:
 
-```{r 'install', eval = FALSE}
+```{r install, eval = FALSE}
 if (!requireNamespace("BiocManager", quietly = TRUE)) {
     install.packages("BiocManager")
 }
@@ -45,7 +67,7 @@ BiocManager::install("aqlyzer")
 
 This is a basic example which shows you how to solve a common problem:
 
-```{r example, eval = requireNamespace('aqlyzer')}
+```{r example, eval = FALSE}
 library("aqlyzer")
 ## basic example code
 ```
@@ -71,7 +93,7 @@ In that case, don't forget to commit and push the resulting figure files, so the
 Below is the citation output from using `citation('aqlyzer')` in R. Please
 run this yourself to check for any updates on how to cite __aqlyzer__.
 
-```{r 'citation', eval = requireNamespace('aqlyzer')}
+```{r 'citation', eval = FALSE}
 print(citation("aqlyzer"), bibtex = TRUE)
 ```
 
@@ -91,5 +113,3 @@ Please note that the `aqlyzer` project is released with a [Contributor Code of C
 For more details, check the `dev` directory.
 
 This package was developed using `r BiocStyle::Biocpkg('biocthis')`.
-
-
