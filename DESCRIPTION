@@ -1,6 +1,6 @@
 Package: aqlyzer
 Title: Fluorescence Kinetics Analysis for Microplate Assays
-Version: 0.99.0
+Version: 0.99.2008
 Date: 2026-07-01
 Authors@R: 
     person(c("Ali", "Sajid"), "Imami", , "Ali.Sajid.Imami@gmail.com", role = c("aut", "cre"),

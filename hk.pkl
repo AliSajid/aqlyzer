@@ -44,8 +44,8 @@ hooks {
         // covers Lucas-C's forbid-tabs/remove-tabs and forbid-crlf/remove-crlf
         // (the latter folded into mixed-line-ending above)
         glob = List("**/*")
-        check = "mise run forbid-tabs -- {{files}}"
-        fix = "mise run remove-tabs -- {{files}}"
+        check = "mise run git-hooks forbid-tabs -- {{files}}"
+        fix = "mise run git-hooks remove-tabs -- {{files}}"
       }
 
       ["file-contents-sorter"] {
@@ -57,7 +57,7 @@ hooks {
       ["no-commit-to-branch"] {
         // hk's builtin only matches literal branch names, not regex, so
         // "RELEASE.*" needs a custom check
-        check = "mise run no-commit-to-branch"
+        check = "mise run git-hooks no-commit-to-branch"
       }
 
       ["forbid-to-commit"] {
@@ -81,23 +81,23 @@ hooks {
 
       ["r-tidy-description"] {
         glob = List("DESCRIPTION")
-        check = "mise run tidy-description-check"
-        fix = "mise run tidy-description-fix"
+        check = "mise run r-description tidy-description-check"
+        fix = "mise run r-description tidy-description-fix"
       }
 
       ["r-parsable"] {
         glob = List("**/*.R", "**/*.r")
-        check = "mise run parsable -- {{files}}"
+        check = "mise run r-parsable parsable {{files}}"
       }
 
       ["r-no-browser-statement"] {
         glob = List("**/*.R", "**/*.r")
-        check = "mise run no-browser -- {{files}}"
+        check = "mise run r-banned-statements no-browser {{files}}"
       }
 
       ["r-no-debug-statement"] {
         glob = List("**/*.R", "**/*.r")
-        check = "mise run no-debug -- {{files}}"
+        check = "mise run r-banned-statements no-debug {{files}}"
       }
 
       ["r-deps-in-desc"] {
@@ -106,19 +106,19 @@ hooks {
         // This mise task does a best-effort static grep-based version.
         // Worth spot-checking output for a while before trusting it fully.
         glob = List("**/*.R", "**/*.r", "DESCRIPTION")
-        check = "mise run deps-in-desc"
+        check = "mise run r-deps deps-in-desc"
       }
 
       ["r-readme-rendered"] {
         glob = List("README.Rmd", "README.md")
-        check = "mise run readme-check"
-        fix = "mise run readme-fix"
+        check = "mise run r-readme readme-check"
+        fix = "mise run r-readme readme-fix"
       }
 
       ["r-style"] {
         // was: styler::style_pkg(transformers = styler::tidyverse_style(indent_by = 4))
         glob = List("**/*.R", "**/*.r")
-        fix = "mise run style -- {{files}}"
+        fix = "mise run r-style style {{files}}"
       }
 
       ["r-lint"] {
@@ -126,7 +126,7 @@ hooks {
         // depends on r-style so lint always evaluates post-formatting output,
         // matching the original style_files -> lint_files order
         glob = List("**/*.R", "**/*.r")
-        check = "mise run lint -- {{files}}"
+        check = "mise run r-style lint {{files}}"
         depends = List("r-style")
       }
 
@@ -145,7 +145,7 @@ hooks {
         // covers both codemeta-description-updated (precommit repo) and the
         // codemeta-json-updated local hook — they did the same thing
         glob = List("DESCRIPTION")
-        fix = "mise run codemeta"
+        fix = "mise run r-metadata codemeta"
         depends = List("bump-version")
       }
     }
@@ -163,7 +163,7 @@ hooks {
   ["post-commit"] {
     steps {
       ["create-version-tag"] {
-        fix = "mise run create-version-tag"
+        fix = "mise run create-tag"
       }
     }
   }
