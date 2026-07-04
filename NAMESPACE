@@ -2,5 +2,4 @@
 
 export(findLinearRange)
 export(findLinearRangeRust)
-importFrom(stats,cor)
 useDynLib(aqlyzer, .registration = TRUE)

@@ -12,3 +12,10 @@ Boolean depending on the presence of the Rust function
 \description{
 Checks for the availability of the Rust function
 }
+\examples{
+\dontrun{
+# Not exported — for illustration only.
+isRustAvailable()
+}
+}
+\keyword{internal}

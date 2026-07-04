@@ -5,13 +5,21 @@
 #' @useDynLib aqlyzer, .registration = TRUE
 NULL
 
-#' Find the linear range of a fluorescence curve by maximising
-#' window R² over all valid start/end index pairs.
+#' Find the linear range of a fluorescence curve (Rust backend)
+#'
+#' Brute-force search over all `(start, end)` window pairs, maximising
+#' window R². Same algorithm as \code{findLinearRangeR()}; called by
+#' \code{findLinearRange()} when the compiled backend is available.
 #'
 #' @param rfu  Numeric vector of RFU values (time-ordered).
 #' @param minPoints  Minimum number of points a window must span.
 #' @return Integer vector of length 2: c(start, end), 1-based.
 #' @export
+#'
+#' @examples
+#' rfu <- c(100, 102, 101, 103, 105, 107, 109, 111, 113, 115, 117, 119,
+#'          118, 116, 114, 112, 110, 108, 106, 104)
+#' findLinearRangeRust(rfu, minPoints = 3L)
 findLinearRangeRust <- function(rfu, minPoints) .Call(wrap__findLinearRangeRust, rfu, minPoints)
 
 # nolint end

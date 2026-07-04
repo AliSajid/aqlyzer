@@ -6,17 +6,35 @@
 \usage{
 findLinearRangeR(rfu, minPoints)
 }
+\arguments{
+\item{rfu}{Numeric vector of RFU values, time-ordered.}
+
+\item{minPoints}{Minimum window size.}
+}
+\value{
+Integer vector c(start, end), 1-based indices into RFU.
+}
 \description{
-Pure R fallback — same algorithm, slower
+Brute-force search over all \verb{(start, end)} window pairs, same algorithm
+as \code{findLinearRangeRust()}. Used by \code{findLinearRange()} when
+the compiled Rust backend is unavailable; not intended to be called
+directly outside of backend-parity tests.
+}
+\details{
+The window R² is computed via the same sum-of-squares formula as the
+Rust backend (rather than \code{stats::cor()}) so both backends do
+numerically identical arithmetic. This matters because smooth curves
+produce many windows with near-identical R²; a different formula's
+rounding can flip which window wins the search.
 }
 \examples{
-# Generate test data
-rfu <- c(100, 102, 101, 103, 105, 107, 109, 111, 113, 115, 117, 119,
-         118, 116, 114, 112, 110, 108, 106, 104)
-
-# Find linear range using pure R implementation
-result <- findLinearRangeR(rfu, minPoints = 3)
-# Returns start and end indices of the linear region
-print(result)
-
+\dontrun{
+# Not exported — for illustration only; use findLinearRange() instead.
+rfu <- c(
+    100, 102, 101, 103, 105, 107, 109, 111, 113, 115, 117, 119,
+    118, 116, 114, 112, 110, 108, 106, 104
+)
+findLinearRangeR(rfu, minPoints = 3L)
 }
+}
+\keyword{internal}

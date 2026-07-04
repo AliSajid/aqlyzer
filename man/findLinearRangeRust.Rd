@@ -2,8 +2,7 @@
 % Please edit documentation in R/extendr-wrappers.R
 \name{findLinearRangeRust}
 \alias{findLinearRangeRust}
-\title{Find the linear range of a fluorescence curve by maximising
-window R² over all valid start/end index pairs.}
+\title{Find the linear range of a fluorescence curve (Rust backend)}
 \usage{
 findLinearRangeRust(rfu, minPoints)
 }
@@ -16,6 +15,12 @@ findLinearRangeRust(rfu, minPoints)
 Integer vector of length 2: c(start, end), 1-based.
 }
 \description{
-Find the linear range of a fluorescence curve by maximising
-window R² over all valid start/end index pairs.
+Brute-force search over all \verb{(start, end)} window pairs, maximising
+window R². Same algorithm as \code{findLinearRangeR()}; called by
+\code{findLinearRange()} when the compiled backend is available.
+}
+\examples{
+rfu <- c(100, 102, 101, 103, 105, 107, 109, 111, 113, 115, 117, 119,
+         118, 116, 114, 112, 110, 108, 106, 104)
+findLinearRangeRust(rfu, minPoints = 3L)
 }
