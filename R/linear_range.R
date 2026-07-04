@@ -4,33 +4,33 @@
 #' falling back to a pure R implementation otherwise.
 #'
 #' @param rfu Numeric vector of RFU values, time-ordered.
-#' @param min_points Minimum window size (default 5).
-#' @return Integer vector c(start, end), 1-based indices into rfu.
+#' @param minPoints Minimum window size (default 5).
+#' @return Integer vector c(start, end), 1-based indices into RFU.
 #' @export
-find_linear_range <- function(rfu, min_points = 5L) {
-    stopifnot(is.numeric(rfu), length(rfu) >= min_points)
+findLinearRange <- function(rfu, minPoints = 5L) {
+    stopifnot(is.numeric(rfu), length(rfu) >= minPoints)
 
-    if (is_rust_available()) {
-        find_linear_range_rust(rfu, min_points)
+    if (isRustAvailable()) {
+        findLinearRangeRust(rfu, minPoints)
     } else {
-        find_linear_range_r(rfu, min_points)
+        findLinearRangeR(rfu, minPoints)
     }
 }
 
 # Pure R fallback — same algorithm, slower
-find_linear_range_r <- function(rfu, min_points) {
+findLinearRangeR <- function(rfu, minPoints) {
     n <- length(rfu)
-    best_r2 <- -Inf
+    bestR2 <- -Inf
     best <- c(1L, n)
 
     for (start in seq_len(n)) {
-        for (end in (start + min_points - 1L):n) {
+        for (end in (start + minPoints - 1L):n) {
             if (end > n) break
             sl <- rfu[start:end]
             x <- seq_along(sl)
-            r2 <- cor(x, sl)^2
-            if (!is.na(r2) && r2 > best_r2) {
-                best_r2 <- r2
+            r2 <- cor(x, sl)^2L
+            if (!is.na(r2) && r2 > bestR2) {
+                bestR2 <- r2
                 best <- c(start, end)
             }
         }
@@ -38,6 +38,6 @@ find_linear_range_r <- function(rfu, min_points) {
     best
 }
 
-is_rust_available <- function() {
-    exists("find_linear_range_rust", mode = "function")
+isRustAvailable <- function() {
+    exists("findLinearRangeRust", mode = "function")
 }

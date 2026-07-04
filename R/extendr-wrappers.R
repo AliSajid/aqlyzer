@@ -12,8 +12,6 @@ NULL
 #' @param min_points  Minimum number of points a window must span.
 #' @return Integer vector of length 2: c(start_idx, end_idx), 1-based.
 #' @export
-find_linear_range_rust <- function(rfu, min_points) {
-    .Call(wrap__find_linear_range_rust, rfu, min_points)
-}
+findLinearRangeRust <- function(rfu, minPoints) .Call(wrap__findLinearRangeRust, rfu, minPoints)
 
 # nolint end

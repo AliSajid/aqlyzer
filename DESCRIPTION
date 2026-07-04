@@ -3,8 +3,17 @@ Title: Fluorescence Kinetics Analysis for Microplate Assays
 Version: 0.99.2008
 Date: 2026-07-01
 Authors@R:
-    person(c("Ali", "Sajid"), "Imami", , "Ali.Sajid.Imami@gmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0003-3684-3539"))
+    c(
+    person(given = c("Ali", "Sajid"),
+           family = "Imami", 
+           email = "Ali.Sajid.Imami@gmail.com",
+           role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-3684-3539")),
+    person(given = c("Robert", "Erne"),
+          family = "McCullumsmith",
+          role = c("ctb", "fnd"),
+          email = "Robert.McCullumsmith@utoledo.edu",
+          comment = c(ORCID = "0000-0001-6921-7150")))
 Description: Provides a reproducible pipeline for processing and analysing
     time-resolved fluorescence kinetics data from 96-well plate readers.
     Covers plate layout validation, signal preprocessing (zeroing, blank

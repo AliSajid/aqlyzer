@@ -8,18 +8,18 @@ use extendr_api::prelude::*;
 /// @return Integer vector of length 2: c(start_idx, end_idx), 1-based.
 /// @export
 #[extendr]
-fn find_linear_range_rust(rfu: &[f64], min_points: i32) -> Vec<i32> {
+fn findLinearRangeRust(rfu: &[f64], minPoints: i32) -> Vec<i32> {
     let n = rfu.len();
-    let min_w = min_points as usize;
+    let minW = minPoints as usize;
 
-    let mut best_r2 = f64::NEG_INFINITY;
+    let mut bestR2 = f64::NEG_INFINITY;
     let mut best = (0usize, n - 1);
 
     for start in 0..n {
-        for end in (start + min_w - 1)..n {
-            let r2 = window_r2(rfu, start, end);
-            if r2 > best_r2 {
-                best_r2 = r2;
+        for end in (start + minW - 1)..n {
+            let r2 = windowR2(rfu, start, end);
+            if r2 > bestR2 {
+                bestR2 = r2;
                 best = (start, end);
             }
         }
@@ -29,7 +29,7 @@ fn find_linear_range_rust(rfu: &[f64], min_points: i32) -> Vec<i32> {
     vec![(best.0 + 1) as i32, (best.1 + 1) as i32]
 }
 
-fn window_r2(y: &[f64], start: usize, end: usize) -> f64 {
+fn windowR2(y: &[f64], start: usize, end: usize) -> f64 {
     let slice = &y[start..=end];
     let n = slice.len() as f64;
     let x_mean = (n - 1.0) / 2.0;
@@ -52,5 +52,5 @@ fn window_r2(y: &[f64], start: usize, end: usize) -> f64 {
 
 extendr_module! {
     mod aqlyzer;
-    fn find_linear_range_rust;
+    fn findLinearRangeRust;
 }
