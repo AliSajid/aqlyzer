@@ -4,8 +4,8 @@ use extendr_api::prelude::*;
 /// window R² over all valid start/end index pairs.
 ///
 /// @param rfu  Numeric vector of RFU values (time-ordered).
-/// @param min_points  Minimum number of points a window must span.
-/// @return Integer vector of length 2: c(start_idx, end_idx), 1-based.
+/// @param minPoints  Minimum number of points a window must span.
+/// @return Integer vector of length 2: c(start, end), 1-based.
 /// @export
 #[extendr]
 fn findLinearRangeRust(rfu: &[f64], minPoints: i32) -> Vec<i32> {

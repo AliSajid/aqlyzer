@@ -10,10 +10,10 @@ findLinearRangeRust(rfu, minPoints)
 \arguments{
 \item{rfu}{Numeric vector of RFU values (time-ordered).}
 
-\item{min_points}{Minimum number of points a window must span.}
+\item{minPoints}{Minimum number of points a window must span.}
 }
 \value{
-Integer vector of length 2: c(start_idx, end_idx), 1-based.
+Integer vector of length 2: c(start, end), 1-based.
 }
 \description{
 Find the linear range of a fluorescence curve by maximising

@@ -18,3 +18,22 @@ Integer vector c(start, end), 1-based indices into RFU.
 Dispatches to a compiled Rust implementation when available,
 falling back to a pure R implementation otherwise.
 }
+\examples{
+# Generate synthetic fluorescence data with linear and plateau regions
+set.seed(123)
+time <- 1:100
+rfu <- 100 + 0.5 * time + 20 * rnorm(100)  # Linear phase with noise
+result <- findLinearRange(rfu, minPoints = 5)
+plot(time, rfu, type = "l", main = "Fluorescence Kinetics")
+abline(v = result[1], col = "red", lty = 2)
+abline(v = result[2], col = "red", lty = 2)
+legend("topright", legend = c("Linear Range", paste0("Start:", result[1])),
+       col = c("red", "blue"), lty = c(2, 1))
+
+# Example with actual assay data
+# data("fluorescence_data")
+# result <- findLinearRange(fluorescence_data, minPoints = 10)
+# start_point <- result[1]
+# end_point <- result[2]
+# linear_values <- fluorescence_data[start_point:end_point]
+}
